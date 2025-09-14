@@ -1,7 +1,7 @@
-import 'package:expense_tracker/home_page.dart';
-import 'package:expense_tracker/pages/notes_add.dart';
-import 'package:expense_tracker/services/db/db_provider.dart';
-import 'package:expense_tracker/services/notes_provider.dart';
+import 'package:notes_tracker/home_page.dart';
+import 'package:notes_tracker/pages/notes_add.dart';
+import 'package:notes_tracker/services/db/db_provider.dart';
+import 'package:notes_tracker/services/notes_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_ce_flutter/adapters.dart';
 import 'package:provider/provider.dart';
@@ -13,13 +13,13 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => ExpenseProvider(),
-      child: ExpenseTracker(),
+      child: NotesTracker(),
     ),
   );
 }
 
-class ExpenseTracker extends StatelessWidget {
-  const ExpenseTracker({super.key});
+class NotesTracker extends StatelessWidget {
+  const NotesTracker({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class ExpenseTracker extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Expense Tracker",
       home: const HomePage(),
-      routes: {"/add_expense": (context) => const ExpenseAdd()},
+      routes: {"/add_notes": (context) => const ExpenseAdd()},
     );
   }
 }

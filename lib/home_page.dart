@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:expense_tracker/services/notes_provider.dart';
+import 'package:notes_tracker/services/notes_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,13 +23,13 @@ class _HomePageState extends State<HomePage> {
       body: ListView.builder(
         itemCount: allnotes.length,
         itemBuilder: (context, index) {
-          final expense = jsonDecode(allnotes[index]);
+          final notes = jsonDecode(allnotes[index]);
           return Column(
             children: [
               ListTile(
-                title: Text("${expense['note']}"),
+                title: Text("${notes['note']}"),
                 onTap: () {
-                  Navigator.of(context).pushNamed("/add_expense", arguments: index);
+                  Navigator.of(context).pushNamed("/add_notes", arguments: index);
                 },
                 trailing: IconButton(
                   onPressed: () {
@@ -45,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue,
         onPressed: () async {
-          Navigator.of(context).pushNamed("/add_expense", arguments: -1);
+          Navigator.of(context).pushNamed("/add_notes", arguments: -1);
         },
         child: Icon(Icons.add),
       ),

@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:expense_tracker/models/notes.dart';
-import 'package:expense_tracker/services/notes_provider.dart';
+import 'package:notes_tracker/models/notes.dart';
+import 'package:notes_tracker/services/notes_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,13 +20,13 @@ class _ExpenseAddState extends State<ExpenseAdd> {
   final TextEditingController _note = TextEditingController();
   void addExpense() {
     final String note = _note.text;
-    Expense expense = Expense(
+    Expense notes = Expense(
       note: note
     );
     if (index == -1) {
-      context.read<ExpenseProvider>().providerAddNotes(expense);
+      context.read<ExpenseProvider>().providerAddNotes(notes);
     } else {
-      context.read<ExpenseProvider>().providerUpdateNotes(expense, index);
+      context.read<ExpenseProvider>().providerUpdateNotes(notes, index);
       index = -1;
     }
     Navigator.of(context).pop();

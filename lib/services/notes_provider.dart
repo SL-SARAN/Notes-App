@@ -1,5 +1,5 @@
-import 'package:expense_tracker/models/notes.dart';
-import 'package:expense_tracker/services/db/db_provider.dart';
+import 'package:notes_tracker/models/notes.dart';
+import 'package:notes_tracker/services/db/db_provider.dart';
 import 'package:flutter/widgets.dart';
 
 class ExpenseProvider extends ChangeNotifier{
@@ -12,8 +12,8 @@ class ExpenseProvider extends ChangeNotifier{
     saveToDb(_allNotes);
   }
 
-  void providerAddNotes(Expense expense) {
-    _allNotes.add(expense.toJson());
+  void providerAddNotes(Expense notes) {
+    _allNotes.add(notes.toJson());
     providerAddNotesToDb();
     notifyListeners();
   }
@@ -24,9 +24,9 @@ class ExpenseProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  void providerUpdateNotes(Expense expense, int index) {
+  void providerUpdateNotes(Expense notes, int index) {
     providerDeleteNotes(index);
-    _allNotes.insert(index, expense.toJson());
+    _allNotes.insert(index, notes.toJson());
     providerAddNotesToDb();
     notifyListeners();
   }
