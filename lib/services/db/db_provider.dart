@@ -11,8 +11,8 @@ List<String> initializeDb() {
   return List<String>.from(db);
 }
 
-void saveToDb(List<String> expenses) {
-  _db?.put("notes", expenses);
+void saveToDb(List<String> note) {
+  _db?.put("notes", note);
 }
 
 void deleteFromDb(int index, List<String> expenses) {

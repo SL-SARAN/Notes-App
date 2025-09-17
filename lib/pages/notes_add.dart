@@ -1,32 +1,43 @@
-import 'dart:convert';
 import 'package:notes_tracker/models/notes.dart';
 import 'package:notes_tracker/services/notes_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ExpenseAdd extends StatefulWidget {
-  const ExpenseAdd({super.key});
+class NoteAdd extends StatefulWidget {
+  const NoteAdd({super.key});
 
   @override
-  State<ExpenseAdd> createState() => _ExpenseAddState();
+  State<NoteAdd> createState() => _NoteAddState();
 }
 
-class _ExpenseAddState extends State<ExpenseAdd> {
+class _NoteAddState extends State<NoteAdd> {
   @override
   void initState() {
     super.initState();
   }
   int index = -1;
+  String buttonText = "Add";
   final TextEditingController _note = TextEditingController();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    index = ModalRoute.of(context)!.settings.arguments as int;
+    if (index != -1) {
+      String textToUpdate = context.read<NoteProvider>().notes[index];
+      _note.text = textToUpdate;
+      buttonText = "Update";
+    }
+  }
   void addExpense() {
     final String note = _note.text;
-    Expense notes = Expense(
+    Note notes = Note(
       note: note
     );
     if (index == -1) {
-      context.read<ExpenseProvider>().providerAddNotes(notes);
+      context.read<NoteProvider>().providerAddNotes(notes);
     } else {
-      context.read<ExpenseProvider>().providerUpdateNotes(notes, index);
+      context.read<NoteProvider>().providerUpdateNotes(notes, index);
       index = -1;
     }
     Navigator.of(context).pop();
@@ -34,13 +45,6 @@ class _ExpenseAddState extends State<ExpenseAdd> {
 
   @override
   Widget build(BuildContext context) {
-    index = ModalRoute.of(context)!.settings.arguments as int;
-    String buttonText = "Add";
-    if (index != -1) {
-      String textToUpdate = context.read<ExpenseProvider>().notes[index];
-      _note.text = jsonDecode(textToUpdate)["note"];
-      buttonText = "Update";
-    }
     return Scaffold(
       appBar: AppBar(
         title: Text("Add the Notes"),

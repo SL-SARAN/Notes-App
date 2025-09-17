@@ -12,7 +12,7 @@ void main() async {
   connectDb();
   runApp(
     ChangeNotifierProvider(
-      create: (context) => ExpenseProvider(),
+      create: (context) => NoteProvider(),
       child: NotesTracker(),
     ),
   );
@@ -27,7 +27,7 @@ class NotesTracker extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: "Expense Tracker",
       home: const HomePage(),
-      routes: {"/add_notes": (context) => const ExpenseAdd()},
+      routes: {"/add_notes": (context) => const NoteAdd()},
     );
   }
 }

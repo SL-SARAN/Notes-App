@@ -2,7 +2,7 @@ import 'package:notes_tracker/models/notes.dart';
 import 'package:notes_tracker/services/db/db_provider.dart';
 import 'package:flutter/widgets.dart';
 
-class ExpenseProvider extends ChangeNotifier{
+class NoteProvider extends ChangeNotifier{
 
   final List<String> _allNotes = initializeDb();
 
@@ -12,8 +12,8 @@ class ExpenseProvider extends ChangeNotifier{
     saveToDb(_allNotes);
   }
 
-  void providerAddNotes(Expense notes) {
-    _allNotes.add(notes.toJson());
+  void providerAddNotes(Note notes) {
+    _allNotes.add(notes.toStore());
     providerAddNotesToDb();
     notifyListeners();
   }
@@ -24,9 +24,9 @@ class ExpenseProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  void providerUpdateNotes(Expense notes, int index) {
+  void providerUpdateNotes(Note notes, int index) {
     providerDeleteNotes(index);
-    _allNotes.insert(index, notes.toJson());
+    _allNotes.insert(index, notes.toStore());
     providerAddNotesToDb();
     notifyListeners();
   }
